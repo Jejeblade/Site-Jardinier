@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Devis index{% endblock %}
+
+{% block body %}
+{% block content %}
+    <h1>Devis index</h1>
+    <div class="taille-tableau">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Longueur</th>
+                <th>Hauteur</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for devi in devis %}
+            <tr>
+                <td class="bg-success">{{ devi.id }}</td>
+                <td class="bg-success">{{ devi.date ? devi.date|date('Y-m-d') : '' }}</td>
+                <td class="bg-success">{{ devi.longueur }}</td>
+                <td class="bg-success">{{ devi.hauteur }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+    {% endblock %}
+{% endblock %}

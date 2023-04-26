@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DevisController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+{% block content %}
+<div class="example-wrapper">
+     {% set prix = maHaie.getPrix() * longueur %}
+  
+
+    {% if hauteur > 1.50 %} 
+        {% set prix = prix * 1.50 %} 
+    {% endif %}
+
+<p>Vous êtes {% if choix == 2 %} {% set remise = 0.10 %} 
+    une Entreprise (Vous bénéficiez d'une remise de 10%). 
+    {% else %} un Particulier. {% endif %}</p>
+<p>Rappel -- Mesures de la haie : Longueur {{ longueur }}m Hauteur {{ hauteur }}m</p>
+
+{% if choix == 2 %}<p>Vous disposez d'un remise de {% set remise = prix * remise %} {{ remise }} {% set prix = prix - remise %} </p>{% endif %}
+
+<p>Le montant de votre devis est de : {{ prix }}€</p>
+<a href="{{ ('accueil') }}">Accueil</a>
+<a href="{{ path('app_client_devis_creation') }}">Passer la commande</a>
+</div>
+{% endblock %}
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ChoixController!{% endblock %}
+
+{% block content %}
+<div class="formmid">
+    <form action="{{ ('mesure') }}" method="post">
+      <div class="middle">
+        <h1>Vous êtes :</h1>
+        <label>
+          <input type="radio" name="feur" value="1" checked />
+          <div class="front-end box">
+            <span>Particulier</span>
+          </div>
+        </label>
+        <label>
+          <input type="radio" name="feur" value="2" />
+          <div class="back-end box">
+            <span>Entreprise</span>
+          </div>
+        </label>
+        <br><br>
+        <button class="btn btn-success" class="btn btn-success">Suite</button>
+      </div>
+    </form>
+</div>
+{% endblock %}
