@@ -13,6 +13,7 @@
                 <th>Date</th>
                 <th>Longueur</th>
                 <th>Hauteur</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -22,6 +23,12 @@
                 <td class="bg-success">{{ devi.date ? devi.date|date('Y-m-d') : '' }}</td>
                 <td class="bg-success">{{ devi.longueur }}</td>
                 <td class="bg-success">{{ devi.hauteur }}</td>
+                {% if is_granted('ROLE_ADMIN') %}
+                <td class="bg-success">
+                    <a href="{{ path('app_devis_crud_show', {'id': devi.id}) }}" class="btn btn-primary">Consulter</a>
+                    <a href="{{ path('app_devis_crud_edit', {'id': devi.id}) }}" class="btn btn-danger">Modifier</a>
+                </td>
+                {% endif %}
             </tr>
         {% else %}
             <tr>

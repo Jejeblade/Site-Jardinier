@@ -21,10 +21,12 @@
                 <td class="bg-success">{{ haie.code }}</td>
                 <td class="bg-success">{{ haie.nom }}</td>
                 <td class="bg-success">{{ haie.prix }}</td>
+                {% if is_granted('ROLE_ADMIN') %}
                 <td class="bg-success">
                     <a href="{{ path('app_haie_show', {'code': haie.code}) }}" class="btn btn-primary">Consulter</a>
                     <a href="{{ path('app_haie_edit', {'code': haie.code}) }}" class="btn btn-danger">Modifier</a>
                 </td>
+                {% endif %}
             </tr>
         {% else %}
             <tr>
@@ -34,6 +36,8 @@
         </tbody>
     </table>
 </div>
+{% if is_granted('ROLE_ADMIN') %}
     <a href="{{ path('app_haie_new') }}" class="btn btn-primary">Créer une haie</a>
+    {% endif %}
 {% endblock %}
 {% endblock %}
