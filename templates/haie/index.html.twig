@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Haie index{% endblock %}
+
+{% block body %}
+{% block content %}
+    <h1>Haie index</h1>
+    <div class="taille-tableau">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Nom</th>
+                <th>Prix</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for haie in haies %}
+            <tr>
+                <td class="bg-success">{{ haie.code }}</td>
+                <td class="bg-success">{{ haie.nom }}</td>
+                <td class="bg-success">{{ haie.prix }}</td>
+                <td class="bg-success">
+                    <a href="{{ path('app_haie_show', {'code': haie.code}) }}" class="btn btn-primary">Consulter</a>
+                    <a href="{{ path('app_haie_edit', {'code': haie.code}) }}" class="btn btn-danger">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+    <a href="{{ path('app_haie_new') }}" class="btn btn-primary">Créer une haie</a>
+{% endblock %}
+{% endblock %}

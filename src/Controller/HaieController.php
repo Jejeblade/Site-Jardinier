@@ -2,99 +2,77 @@
 
 namespace App\Controller;
 
-use App\Entity\Categorie;
 use App\Entity\Haie;
-
-use Doctrine\Persistence\ManagerRegistry;
+use App\Form\HaieType;
+use App\Repository\HaieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route('/haie')]
 class HaieController extends AbstractController
 {
-    
-   /**
-     * @Route("/haie/creer", name="creer_haie")
-     */
-    public function creer_haie(ManagerRegistry $doctrine): Response
-    {
-        $entityManager = $doctrine->getManager();
-
-        $categorie= new Categorie();
-        $categorie->setLibelle('Persistant');
- 
-        $haie = new Haie();
-        $haie->setCode('TR');
-        $haie->setNom('Troène');
-        $haie->setPrix(28);
-
-        $haie->setCategorie($categorie);
-
- 
-        $entityManager->persist($haie);
-        $entityManager->flush();
-        return new Response('Type de haie créé avec le code '.$haie->getCode(),
-        ' et nouvelle catégorie avec id: '.$categorie->getId());
-    }
-
-    /**
-* @Route("/haie/{code}", name="voir_haie")
-*/
-public function voir_haie(string $code, ManagerRegistry $doctrine): Response
-{
-   $haie = $doctrine
-       ->getRepository(Haie::class)
-       ->find($code);
- 
-   if (!$haie) {
-        return new Response('Ce type de haie n\'existe pas : '.$code);
-   }
-   else {
-        return new Response('Type de haie : '.$haie->getNom().' à '.$haie->getPrix().'€');
-   }
-}
-
-/**
-* @Route("/haie/modifier/{code}", name="modifier_haie")
-*/
-public function modifier_haie(string $code, ManagerRegistry $doctrine): Response
-{
-   $haie = $doctrine
-      ->getRepository(Haie::class)
-      ->find($code);
-   $entityManager = $doctrine->getManager();
- 
-   $haie->setPrix(42);
-   $entityManager->flush();
- 
-   return $this->redirectToRoute('voir_haie', ['code'=>$haie->getCode()]);
-}
-
-/**
-* @Route("/haie/supprimer/{code}", name="supprimer_haie")
-*/
-public function supprimer_haie(string $code, ManagerRegistry $doctrine): Response
-{
-   $haie = $doctrine
-      ->getRepository(Haie::class)
-      ->find($code);
-   $entityManager = $doctrine->getManager();
- 
-   $entityManager->remove($haie);
-    $entityManager->flush();
- 
-    return new Response('haie supprimer');
-}
-
-
-    /**
-     * @Route("/haie", name="haie")
-     */
-    public function index(ManagerRegistry $doctrine): Response
+    #[Route('/', name: 'app_haie_index', methods: ['GET'])]
+    public function index(HaieRepository $haieRepository): Response
     {
         return $this->render('haie/index.html.twig', [
-            'controller_name' => 'HaieController',
-        
+            'haies' => $haieRepository->findAll(),
         ]);
+    }
+
+    #[Route('/new', name: 'app_haie_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, HaieRepository $haieRepository): Response
+    {
+        $haie = new Haie();
+        $form = $this->createForm(HaieType::class, $haie);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $haieRepository->save($haie, true);
+
+            return $this->redirectToRoute('app_haie_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('haie/new.html.twig', [
+            'haie' => $haie,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/{code}', name: 'app_haie_show', methods: ['GET'])]
+    public function show(Haie $haie): Response
+    {
+        return $this->render('haie/show.html.twig', [
+            'haie' => $haie,
+        ]);
+    }
+
+    #[Route('/{code}/edit', name: 'app_haie_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Haie $haie, HaieRepository $haieRepository): Response
+    {
+        $form = $this->createForm(HaieType::class, $haie);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $haieRepository->save($haie, true);
+
+            return $this->redirectToRoute('app_haie_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('haie/edit.html.twig', [
+            'haie' => $haie,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/{code}', name: 'app_haie_delete', methods: ['POST'])]
+    public function delete(Request $request, Haie $haie, HaieRepository $haieRepository): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$haie->getCode(), $request->request->get('_token'))) {
+            $haieRepository->remove($haie, true);
+        }
+
+        return $this->redirectToRoute('app_haie_index', [], Response::HTTP_SEE_OTHER);
     }
 }

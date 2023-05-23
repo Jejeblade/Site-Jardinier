@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Haie{% endblock %}
+
+{% block body %}
+{% block content %}
+    <h1>Créer une haie</h1>
+
+    {{ include('haie/_form.html.twig') }}
+
+    <a href="{{ path('app_haie_index') }}">back to list</a>
+{% endblock %}
+{% endblock %}

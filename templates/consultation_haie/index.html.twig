@@ -13,6 +13,7 @@
         <th scope="col">Prix</td>
             {% if is_granted('ROLE_ADMIN') %}
         <th>Modification</td>
+        <th>Suppression</td>
             {% endif %}
     </tr>
 </thead>
@@ -23,14 +24,17 @@
         <td class="bg-success">{{ item.getNom() }}</td>
         <td class="bg-success">{{ item.getPrix() }}</td>
         {% if is_granted('ROLE_ADMIN') %}
-        <td class="bg-success"><a name="code" href="{{ path(('app_modification_haie'), { 'code' : item.getCode() }) }}" class="btn btn-primary">Modification</a></td>
+        <td class="bg-success"><a name="code" href="{{ path(('app_modification_haie'), { 'code' : item.getCode() }) }}" class="btn btn-primary">Modificatier</a></td>
+        <td class="bg-success"><a name="code" href="{{ path(('app_supprimer_haie'), { 'code' : item.getCode() }) }}" class="btn btn-primary">Supprimer</a></td>
         {% endif %}
     </tr>
 {% endfor %}
 </tbody>
 </table>
 </div>
+{% if is_granted('ROLE_ADMIN') %}
 <a href="{{ path('app_creer_haie') }}" class="btn btn-primary">Créer une haie</a>
+{% endif %}
     {% endblock %}
 {% endblock %}
 

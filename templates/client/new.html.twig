@@ -4,10 +4,10 @@
 
 {% block body %}
 {% block content %}
-    <h1>Create new Client</h1>
+    <h1>Créer un clientClient</h1>
 
     {{ include('client/_form.html.twig') }}
-
-    <a href="{{ path('app_client_index') }}" >Consulter</a>
+    <br>
+    <a href="{{ path('app_client_index') }}" class="btn btn-primary">Consulter</a>
     {% endblock %}
 {% endblock %}
