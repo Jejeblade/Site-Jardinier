@@ -5,27 +5,31 @@
 {% block body %}
 {% block content %}
     <h1>Haie</h1>
-
+    <div class="taille-tableau-show">
     <table class="table">
         <tbody>
-            <tr>
+            <tr class="bg-success">
                 <th>Code</th>
                 <td>{{ haie.code }}</td>
             </tr>
-            <tr>
+            <tr class="bg-success">
                 <th>Nom</th>
                 <td>{{ haie.nom }}</td>
             </tr>
-            <tr>
+            <tr class="bg-success">
                 <th>Prix</th>
                 <td>{{ haie.prix }}</td>
             </tr>
+            <tr class="bg-success">
+                <th>Catégorie</th>
+                <td>{{ haie.categorie.libelle }}</td>
+            </tr>
         </tbody>
     </table>
+    </div>
+    <a href="{{ path('app_haie_index') }}" class="btn btn-primary">Retour</a>
 
-    <a href="{{ path('app_haie_index') }}">back to list</a>
-
-    <a href="{{ path('app_haie_edit', {'code': haie.code}) }}">edit</a>
+    <a href="{{ path('app_haie_edit', {'code': haie.code}) }}" class="btn btn-primary">Modifier</a>
 
     {{ include('haie/_delete_form.html.twig') }}
 {% endblock %}

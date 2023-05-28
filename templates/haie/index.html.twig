@@ -4,7 +4,7 @@
 
 {% block body %}
 {% block content %}
-    <h1>Haie index</h1>
+    <h1>Haie</h1>
     <div class="taille-tableau">
     <table class="table">
         <thead>
@@ -12,7 +12,10 @@
                 <th>Code</th>
                 <th>Nom</th>
                 <th>Prix</th>
+                <th>Catégorie</th>
+                {% if is_granted('ROLE_ADMIN') %}
                 <th>actions</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -21,6 +24,7 @@
                 <td class="bg-success">{{ haie.code }}</td>
                 <td class="bg-success">{{ haie.nom }}</td>
                 <td class="bg-success">{{ haie.prix }}</td>
+                <td class="bg-success">{{ haie.categorie.libelle }}</td>
                 {% if is_granted('ROLE_ADMIN') %}
                 <td class="bg-success">
                     <a href="{{ path('app_haie_show', {'code': haie.code}) }}" class="btn btn-primary">Consulter</a>

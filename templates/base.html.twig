@@ -42,12 +42,14 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ path('app_haie_index') }}">Consulter les haies</a>
           </li>
+          {% if is_granted('ROLE_ADMIN') %}
           <li class="nav-item">
             <a class="nav-link" href="{{ path('app_client_index') }}">Consulter les clients</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ path('app_devis_crud_index') }}">Consulter les devis</a>
           </li>
+          {% endif %}
         </ul>
         <ul class="navbar-nav ms-auto gauche">
           {% if is_granted('ROLE_USER') %}

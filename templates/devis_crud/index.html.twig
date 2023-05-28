@@ -4,7 +4,7 @@
 
 {% block body %}
 {% block content %}
-    <h1>Devis index</h1>
+    <h1>Devis</h1>
     <div class="taille-tableau">
     <table class="table">
         <thead>
@@ -13,7 +13,9 @@
                 <th>Date</th>
                 <th>Longueur</th>
                 <th>Hauteur</th>
+                {% if is_granted('ROLE_ADMIN') %}
                 <th></th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>

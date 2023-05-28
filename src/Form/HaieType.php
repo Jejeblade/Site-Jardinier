@@ -17,7 +17,7 @@ class HaieType extends AbstractType
             ->add('code', TextType::class, array('attr' => ['class' => 'form-mid']))
             ->add('nom', TextType::class, array('attr' => ['class' => 'form-mid']))
             ->add('prix', TextType::class, array('attr' => ['class' => 'form-mid']))
-            ->add('categorie', EntityType::class, ['class' => 'App\Entity\Categorie', 'choice_label' => 'libelle'])
+            ->add('categorie', EntityType::class, ['class' => 'App\Entity\Categorie', 'attr' => ['class' => 'form-mid'], 'choice_label' => 'libelle'])
         ;
     }
 

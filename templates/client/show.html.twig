@@ -39,10 +39,10 @@
         </tbody>
     </table>
     </div>
-    <a href="{{ path('app_client_index') }}" class="btn btn-primary">Consulter</a>
+    <a href="{{ path('app_client_index') }}" class="btn btn-primary">Retour</a>
 
     <a href="{{ path('app_client_edit', {'id': client.id}) }}" class="btn btn-primary">Modifier</a>
-
+    <br><br>
     {{ include('client/_delete_form.html.twig') }}
     {% endblock %}
 {% endblock %}

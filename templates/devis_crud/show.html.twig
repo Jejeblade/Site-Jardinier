@@ -3,32 +3,38 @@
 {% block title %}Devis{% endblock %}
 
 {% block body %}
+{% block content %}
     <h1>Devis</h1>
     <div class="taille-tableau">
     <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ devi.id }}</td>
+            <tr class="bg-success">
+                <th>haie</th>
+                <td>{{ devi.haie.nom }}</td>
             </tr>
-            <tr>
+            <tr class="bg-success">
                 <th>Date</th>
                 <td>{{ devi.date ? devi.date|date('Y-m-d') : '' }}</td>
             </tr>
-            <tr>
+            <tr class="bg-success">
                 <th>Longueur</th>
                 <td>{{ devi.longueur }}</td>
             </tr>
-            <tr>
+            <tr class="bg-success">
                 <th>Hauteur</th>
                 <td>{{ devi.hauteur }}</td>
+            </tr>
+            <tr class="bg-success">
+                <th>Client</th>
+                <td>{{ devi.client.nom }}</td>
             </tr>
         </tbody>
     </table>
     </div>
-    <a href="{{ path('app_devis_crud_index') }}">back to list</a>
+    <a href="{{ path('app_devis_crud_index') }}" class="btn btn-primary">Retour</a>
 
-    <a href="{{ path('app_devis_crud_edit', {'id': devi.id}) }}">edit</a>
-
+    <a href="{{ path('app_devis_crud_edit', {'id': devi.id}) }}" class="btn btn-primary">Modifier</a>
+    <br><br>
     {{ include('devis_crud/_delete_form.html.twig') }}
+{% endblock %}
 {% endblock %}

@@ -42,12 +42,12 @@ class ClientDevisCreationController extends AbstractController
     
         $client = new Client();
         $form = $this->createFormBuilder($client)
-        ->add('nom', TextType::class, array('label'=>'nom'))
-        ->add('prenom', TextType::class, array('label'=>'prenom'))
-        ->add('adresse', TextType::class, array('label'=>'adresse'))
-        ->add('ville', TextType::class, array('label'=>'ville'))
-        ->add('cp', TextType::class, array('label'=>'cp'))
-        ->add('save', SubmitType::class, array('label' => 'GENERER'))
+        ->add('nom', TextType::class, array('label'=>'nom', 'attr' => ['class' => 'form-mid']))
+        ->add('prenom', TextType::class, array('label'=>'prenom', 'attr' => ['class' => 'form-mid']))
+        ->add('adresse', TextType::class, array('label'=>'adresse', 'attr' => ['class' => 'form-mid']))
+        ->add('ville', TextType::class, array('label'=>'ville', 'attr' => ['class' => 'form-mid']))
+        ->add('cp', TextType::class, array('label'=>'code postal', 'attr' => ['class' => 'form-mid']))
+        ->add('save', SubmitType::class, array('label' => 'VALIDER'))
         ->getForm();
 
         $form->handleRequest($request);

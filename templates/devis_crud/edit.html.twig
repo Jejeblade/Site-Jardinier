@@ -3,11 +3,19 @@
 {% block title %}Edit Devis{% endblock %}
 
 {% block body %}
-    <h1>Edit Devis</h1>
+{% block content %}
+    <h1>Modifier le Devis</h1>
 
-    {{ include('devis_crud/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_devis_crud_index') }}">back to list</a>
-
+    {{ include('devis_crud/_form.html.twig', {'button_label': 'Modifier'}) }}
+<table style="width: 10%;
+    margin-right: 45%;
+    margin-left: 45%;">
+        <th>
+    <a href="{{ path('app_devis_crud_index') }}" class="btn btn-primary">Retour</a>
+        </th>
+        <th>
     {{ include('devis_crud/_delete_form.html.twig') }}
+</th>
+</table>
+{% endblock %}
 {% endblock %}

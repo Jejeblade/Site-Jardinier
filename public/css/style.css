@@ -32,6 +32,20 @@ h1 {
   -webkit-transform: translate(-50%, -50%);
 }
 
+.devis{
+  padding: 23px;
+  margin-left: 25%;
+  margin-right: 25%;
+     border-width: 3px;
+     border-color: #CCCCCC;
+     background-color: rgb(249, 210, 162);
+     color: #000000;
+     border-style: solid;
+     border-radius: 29px;
+     box-shadow: 4px 7px 13px rgba(66,66,66,.58);
+     text-shadow: 0px 0px 5px rgba(66,66,66,.75);
+}
+
 #mesure input{
     padding:10px;
     border-radius:10px;
