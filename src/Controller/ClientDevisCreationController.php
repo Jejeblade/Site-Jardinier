@@ -73,8 +73,12 @@ class ClientDevisCreationController extends AbstractController
             return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
         }
         
+        if($this->isGranted('ROLE_USER')){
         return $this->render('client_devis_creation/index.html.twig', 
         array('form' => $form->createView())
         );
+    }else{
+        return $this->redirectToRoute('app_accueil');
+    }
     }
 }
